@@ -7,7 +7,10 @@ let mapedKeys = [];
 
 const playTune = (key) => {
   audio.src = `src/tunes/${key}.wav`;
-  audio.play();
+  audio.currentTime = 0;
+  audio.play().catch((error) => {
+    console.error("Não foi possível reproduzir o áudio:", error);
+  });
 
   const clickedKey = document.querySelector(`[data-key="${key}"]`);
   clickedKey.classList.add("active");
